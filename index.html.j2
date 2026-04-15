@@ -1,124 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Node Status Dashboard - Dark Mode</title>
-    <style>
-        /* Bảng màu Dark Mode  */
-        :root {
-            --bg-color: #1a202c;         
-            --card-bg: #2d3748;        
-            --info-box-bg: #1a202c;     
-            --text-main: #f7fafc;       
-            --text-muted: #a0aec0;      
-            --accent-blue: #3182ce;     
-            --variable-color: #63b3ed;  
-            --success-green: #48bb78;   
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Node Status Dashboard</title>
+<style>
+body {
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #f4f7f6;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	margin: 0;
+}
 
-        body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-main);
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-        }
+.card {
+	background: white;
+	padding: 2rem;
+	border-radius: 12px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+	text-align: center;
+	width: 400px;
+	border-top: 5px solid #007bff;
+}
 
-        .card { 
-            background: var(--card-bg); 
-            padding: 2.5rem; 
-            border-radius: 12px; 
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2); 
-            text-align: center; 
-            width: 450px; 
-            border-top: 6px solid var(--accent-blue); 
-        }
+h1 {
+	color: #333;
+	margin-bottom: 0.5rem;
+	font-size: 1.5rem;
+}
 
-        h1 { 
-            color: var(--text-main); 
-            margin: 1.5rem 0 0.5rem 0; 
-            font-size: 1.8rem; 
-            letter-spacing: -0.025em;
-        }
+.status-badge {
+	background: #28a745;
+	color: white;
+	padding: 4px 12px;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+}
 
-        .status-badge { 
-            background: var(--success-green); 
-            color: white; 
-            padding: 6px 16px; 
-            border-radius: 9999px; 
-            font-size: 0.75rem; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            letter-spacing: 0.05em;
-        }
+.info-box {
+	margin-top: 1.5rem;
+	text-align: left;
+	background: #f8f9fa;
+	padding: 1rem;
+	border-radius: 8px;
+}
 
-        .sub-text {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
+.label {
+	color: #666;
+	font-size: 0.9rem;
+}
 
-        .info-box { 
-            margin-top: 1.5rem; 
-            text-align: left; 
-            background: var(--info-box-bg); 
-            padding: 1.5rem; 
-            border-radius: 10px; 
-            border: 1px solid rgba(255,255,255,0.05);
-        }
+.value {
+	color: #007bff;
+	font-weight: bold;
+	font-family: 'Courier New', Courier, monospace;
+}
 
-        .info-row {
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .info-row:last-child { margin-bottom: 0; }
-
-        .label { 
-            color: var(--text-muted); 
-            font-size: 0.95rem; 
-            margin-right: 8px;
-        }
-
-        .value { 
-            color: var(--variable-color); 
-            font-weight: 600; 
-            font-family: 'Consolas', 'Monaco', monospace; 
-        }
-
-        .footer { 
-            margin-top: 2rem; 
-            font-size: 0.85rem; 
-            color: var(--text-muted); 
-        }
-    </style>
+.footer {
+	margin-top: 1rem;
+	font-size: 0.8rem;
+	color: #999;
+}
+</style>
 </head>
 <body>
-    <div class="card">
-        <span class="status-badge">Node Online</span>
-        <h1>System Information</h1>
-        <div class="sub-text">Automated Deployment via Ansible</div>
-        
-        <div class="info-box">
-            <div class="info-row">
-                <span class="label">Node Hostname:</span> 
-                <span class="value">{{ ansible_hostname }}</span>
-            </div>
-            <div class="info-row">
-                <span class="label">IPv4 Address:</span> 
-                <span class="value">{{ ansible_default_ipv4.address }}</span>
-            </div>
-            <div class="info-row">
-                <span class="label">OS Family:</span> 
-                <span class="value">{{ ansible_os_family }}</span>
-            </div>
-        </div>
-       
-    </div>
+	<div class="card">
+		<span class="status-badge">Node Online</span>
+		<h1>System Information</h1>
+		<p style="color: #666;">Automated Deployment via Ansible</p>
+
+		<div class="info-box">
+			<div>
+				<span class="label">Node Hostname:</span> <span class="value">{{
+					ansible_hostname }}</span>
+			</div>
+			<div style="margin-top: 10px;">
+				<span class="label">IPv4 Address:</span> <span class="value">{{
+					ansible_default_ipv4.address }}</span>
+			</div>
+			<div style="margin-top: 10px;">
+				<span class="label">OS Family:</span> <span class="value">{{
+					ansible_os_family }}</span>
+			</div>
+		</div>
+
+	</div>
 </body>
 </html>
